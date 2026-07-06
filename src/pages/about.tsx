@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
+import SEO, { breadcrumbSchema, orgSchema } from "@/components/SEO";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -55,13 +55,18 @@ const values = [
 const About: NextPage = () => {
 	return (
 		<>
-			<Head>
-				<title>About — Kaistrum</title>
-				<meta
-					name="description"
-					content="Kaistrum is an enterprise GIS company building spatial intelligence software for governments, utilities, and NGOs across Africa and beyond."
-				/>
-			</Head>
+			<SEO
+				title="About — Kaistrum"
+				description="Kaistrum is an enterprise GIS company building spatial intelligence software for governments, utilities, and NGOs across Africa and beyond."
+				path="/about"
+				jsonLd={[
+					orgSchema(),
+					breadcrumbSchema([
+						{ name: "Home", path: "/" },
+						{ name: "About", path: "/about" }
+					])
+				]}
+			/>
 
 			<Header />
 

@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
+import SEO, { breadcrumbSchema } from "@/components/SEO";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, Check } from "lucide-react";
 import Header from "@/components/Header";
@@ -995,12 +995,16 @@ const IndustryPage: NextPage<{ industry: IndustryData }> = ({ industry }) => {
 
   return (
     <>
-      <Head>
-        <title>{industry.name} GIS Solutions — Kaistrum</title>
-        <meta name="description" content={industry.description} />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SEO
+        title={`${industry.name} GIS Solutions — Kaistrum`}
+        description={industry.description}
+        path={`/industries/${industry.slug}`}
+        jsonLd={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Industries", path: "/#industries" },
+          { name: industry.name, path: `/industries/${industry.slug}` }
+        ])}
+      />
 
       <Header />
 

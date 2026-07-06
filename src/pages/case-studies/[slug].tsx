@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
+import SEO, { breadcrumbSchema, articleSchema } from "@/components/SEO";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
@@ -94,10 +94,25 @@ const CaseStudyPage: NextPage<Props> = ({ caseStudy: c }) => {
 
 	return (
 		<>
-			<Head>
-				<title>{c.title} — Kaistrum Case Study</title>
-				<meta name="description" content={c.summary} />
-			</Head>
+			<SEO
+				title={`${c.title} — Kaistrum Case Study`}
+				description={c.summary}
+				path={`/case-studies/${c.slug}`}
+				type="article"
+				jsonLd={[
+					articleSchema({
+						title: c.title,
+						description: c.summary,
+						path: `/case-studies/${c.slug}`,
+						datePublished: `${c.year}-01-01`
+					}),
+					breadcrumbSchema([
+						{ name: "Home", path: "/" },
+						{ name: "Case Studies", path: "/case-studies" },
+						{ name: c.title, path: `/case-studies/${c.slug}` }
+					])
+				]}
+			/>
 
 			<Header />
 

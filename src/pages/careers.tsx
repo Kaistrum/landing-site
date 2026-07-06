@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
+import SEO, { breadcrumbSchema } from "@/components/SEO";
 import { motion } from "framer-motion";
 import { ArrowRight, Inbox } from "lucide-react";
 import Header from "@/components/Header";
@@ -9,13 +9,15 @@ import Footer from "@/components/Footer";
 const Careers: NextPage = () => {
 	return (
 		<>
-			<Head>
-				<title>Careers — Kaistrum</title>
-				<meta
-					name="description"
-					content="Open roles at Kaistrum. We're a small team building enterprise GIS software for governments and utilities across Africa."
-				/>
-			</Head>
+			<SEO
+				title="Careers — Kaistrum"
+				description="Open roles at Kaistrum. We're a small team building enterprise GIS software for governments and utilities across Africa."
+				path="/careers"
+				jsonLd={breadcrumbSchema([
+					{ name: "Home", path: "/" },
+					{ name: "Careers", path: "/careers" }
+				])}
+			/>
 
 			<Header />
 

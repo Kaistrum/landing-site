@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import type { NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
+import SEO, { breadcrumbSchema } from "@/components/SEO";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
@@ -134,13 +134,15 @@ const CaseStudiesIndex: NextPage = () => {
 
 	return (
 		<>
-			<Head>
-				<title>Case Studies — Kaistrum</title>
-				<meta
-					name="description"
-					content="Real-world GIS deployments across government, utilities, agriculture, and humanitarian sectors."
-				/>
-			</Head>
+			<SEO
+				title="Case Studies — Kaistrum"
+				description="Real-world GIS deployments across government, utilities, agriculture, and humanitarian sectors. Full case studies with measurable outcomes."
+				path="/case-studies"
+				jsonLd={breadcrumbSchema([
+					{ name: "Home", path: "/" },
+					{ name: "Case Studies", path: "/case-studies" }
+				])}
+			/>
 
 			<Header />
 

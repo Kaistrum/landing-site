@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import Head from "next/head";
 import Link from "next/link";
+import SEO, { breadcrumbSchema, serviceSchema } from "@/components/SEO";
 import { motion } from "framer-motion";
 import {
 	ArrowRight,
@@ -726,12 +726,19 @@ const ServicePage: NextPage<{ service: ServiceData }> = ({ service }) => {
 
 	return (
 		<>
-			<Head>
-				<title>{service.tab} — Kaistrum</title>
-				<meta name="description" content={service.description} />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+			<SEO
+				title={`${service.tab} — Kaistrum`}
+				description={service.description}
+				path={`/services/${service.slug}`}
+				jsonLd={[
+					serviceSchema(service.tab, service.description),
+					breadcrumbSchema([
+						{ name: "Home", path: "/" },
+						{ name: "Services", path: "/#products" },
+						{ name: service.tab, path: `/services/${service.slug}` }
+					])
+				]}
+			/>
 
 			<Header />
 

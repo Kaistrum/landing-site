@@ -2,7 +2,7 @@ import { useRef, useState, FormEvent } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import WordsPullUp from "./animations/WordsPullUp";
+import WordsPullUpMultiStyle from "./animations/WordsPullUpMultiStyle";
 
 export default function Contact() {
 	const sectionRef = useRef<HTMLDivElement>(null);
@@ -74,10 +74,25 @@ export default function Contact() {
 						style={{ color: "var(--accent)" }}>
 						Contact
 					</p>
-					<div
-						className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold max-w-3xl mx-auto leading-[0.93]"
-						style={{ color: "var(--text)" }}>
-						<WordsPullUp text="Let's map your next project." />
+					<div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95] max-w-3xl mx-auto">
+						<WordsPullUpMultiStyle
+							justify="center"
+							segments={[
+								{
+									text: "Let's map",
+									className: "font-semibold",
+									style: { color: "var(--text)" }
+								},
+								{
+									text: " your next project.",
+									className: "font-normal italic",
+									style: {
+										fontFamily: "'Instrument Serif', serif",
+										color: "var(--text-dim)"
+									}
+								}
+							]}
+						/>
 					</div>
 					<p
 						className="text-sm md:text-base mt-5 max-w-lg mx-auto leading-relaxed"

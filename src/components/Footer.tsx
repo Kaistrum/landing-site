@@ -36,18 +36,6 @@ const footerColumns = [
 	{
 		heading: "Case Studies",
 		links: [
-			{
-				label: "Nairobi Digital Twin",
-				href: "/case-studies/nairobi-digital-twin"
-			},
-			{
-				label: "KenGen Pipeline Network",
-				href: "/case-studies/kengen-pipeline"
-			},
-			{
-				label: "Smallholder Crop Monitoring",
-				href: "/case-studies/smallholder-crop-monitoring"
-			},
 			{ label: "RAPIDA — UNDP", href: "/case-studies/rapida-undp" },
 			{ label: "All case studies", href: "/case-studies" }
 		]
