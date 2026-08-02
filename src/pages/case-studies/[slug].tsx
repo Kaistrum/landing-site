@@ -209,12 +209,20 @@ const CaseStudyPage: NextPage<Props> = ({ caseStudy: c }) => {
 					</div>
 				</section>
 
-				{/* ── Wide image ── */}
-				<ImgPlaceholder
-					label={c.imagePlaceholders.wide}
-					aspect="16/6"
-					id="hero-wide"
-				/>
+				{/* ── Wide image / demo video ── */}
+				{c.videoEmbed ? (
+					<div
+						className="relative w-full overflow-hidden [&>iframe]:absolute [&>iframe]:inset-0 [&>iframe]:w-full [&>iframe]:h-full"
+						style={{ aspectRatio: "16/6", background: "var(--bg-surface)" }}
+						dangerouslySetInnerHTML={{ __html: c.videoEmbed }}
+					/>
+				) : (
+					<ImgPlaceholder
+						label={c.imagePlaceholders.wide}
+						aspect="16/6"
+						id="hero-wide"
+					/>
+				)}
 
 				{/* ── Results strip ── */}
 				<section
@@ -369,11 +377,30 @@ const CaseStudyPage: NextPage<Props> = ({ caseStudy: c }) => {
 					}}>
 					<div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center">
 						<FadeIn>
-							<ImgPlaceholder
-								label={c.imagePlaceholders.narrow}
-								aspect="4/3"
-								id="narrow"
-							/>
+							{c.narrowVideo ? (
+								<div
+									className="relative w-full max-w-[300px] mx-auto overflow-hidden border"
+									style={{
+										aspectRatio: "9/16",
+										background: "var(--bg-surface)",
+										borderColor: "var(--border)"
+									}}>
+									<video
+										src={c.narrowVideo}
+										autoPlay
+										loop
+										muted
+										playsInline
+										className="absolute inset-0 w-full h-full object-cover"
+									/>
+								</div>
+							) : (
+								<ImgPlaceholder
+									label={c.imagePlaceholders.narrow}
+									aspect="4/3"
+									id="narrow"
+								/>
+							)}
 						</FadeIn>
 						<FadeIn delay={0.1}>
 							<p

@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import SEO, { breadcrumbSchema } from "@/components/SEO";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -33,36 +34,47 @@ function CaseCard({
 			transition={{ duration: 0.75, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
 			className="group flex flex-col border h-full"
 			style={{ background: "var(--bg-card)", borderColor: "var(--border)" }}>
-			{/* Image placeholder */}
+			{/* Thumbnail */}
 			<div
 				className="relative overflow-hidden"
 				style={{ aspectRatio: "16/9", background: "var(--bg-surface)" }}>
-				<svg
-					className="absolute inset-0 w-full h-full opacity-[0.04]"
-					xmlns="http://www.w3.org/2000/svg">
-					<defs>
-						<pattern
-							id={`grid-cs-${c.slug}`}
-							width="32"
-							height="32"
-							patternUnits="userSpaceOnUse">
-							<path
-								d="M 32 0 L 0 0 0 32"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="0.5"
-							/>
-						</pattern>
-					</defs>
-					<rect width="100%" height="100%" fill={`url(#grid-cs-${c.slug})`} />
-				</svg>
-				<div className="absolute inset-0 flex items-center justify-center px-6">
-					<p
-						className="text-xs text-center font-medium"
-						style={{ color: "var(--text-muted)" }}>
-						{c.imagePlaceholders.wide}
-					</p>
-				</div>
+				{c.thumbnail ? (
+					<Image
+						src={c.thumbnail}
+						alt={c.title}
+						fill
+						className="object-contain p-10"
+					/>
+				) : (
+					<>
+						<svg
+							className="absolute inset-0 w-full h-full opacity-[0.04]"
+							xmlns="http://www.w3.org/2000/svg">
+							<defs>
+								<pattern
+									id={`grid-cs-${c.slug}`}
+									width="32"
+									height="32"
+									patternUnits="userSpaceOnUse">
+									<path
+										d="M 32 0 L 0 0 0 32"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="0.5"
+									/>
+								</pattern>
+							</defs>
+							<rect width="100%" height="100%" fill={`url(#grid-cs-${c.slug})`} />
+						</svg>
+						<div className="absolute inset-0 flex items-center justify-center px-6">
+							<p
+								className="text-xs text-center font-medium"
+								style={{ color: "var(--text-muted)" }}>
+								{c.imagePlaceholders.wide}
+							</p>
+						</div>
+					</>
+				)}
 				<div
 					className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.18em] font-semibold px-2.5 py-1"
 					style={{ background: c.accent + "22", color: c.accent }}>

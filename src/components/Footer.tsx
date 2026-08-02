@@ -36,7 +36,7 @@ const footerColumns = [
 	{
 		heading: "Case Studies",
 		links: [
-			{ label: "RAPIDA — UNDP", href: "/case-studies/rapida-undp" },
+			{ label: "Faraja — UNDP RAPIDA", href: "/case-studies/faraja" },
 			{ label: "All case studies", href: "/case-studies" }
 		]
 	},

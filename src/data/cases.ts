@@ -33,99 +33,111 @@ export type CaseStudyData = {
 		title: string;
 	};
 	imagePlaceholders: { wide: string; narrow: string };
+	videoEmbed?: string;
+	narrowVideo?: string;
+	thumbnail?: string;
 };
 
 const cases: CaseStudyData[] = [
 	{
-		slug: "rapida-undp",
-		tag: "Humanitarian · UNDP",
+		slug: "faraja",
+		tag: "Humanitarian · Crisis Response Tech",
 		industry: "Disaster Response",
-		client: "United Nations Development Programme",
+		client: "Independent build, inspired by UNDP's RAPIDA methodology",
 		location: "Global",
-		year: "2024",
-		title: "RAPIDA: Community Crisis Damage Assessment",
+		year: "2026",
+		title: "Faraja: Crowdsourced Crisis Damage Assessment",
 		summary:
-			"For UNDP's RAPIDA early recovery methodology, Kaistrum engineered an end-to-end crowdsourced crisis-response platform — enabling communities to submit geolocated damage reports within 72 hours of a sudden-onset disaster, with AI-assisted translation across all six official UN languages and offline-first mobile functionality for low-connectivity environments.",
+			"UNDP's RAPIDA methodology delivers early recovery insight from satellite imagery, night-light data, and social media — but ground-level, structured field data still takes days to arrive. Kaistrum built Faraja to close that gap: an open-source, end-to-end platform that lets communities submit geolocated, AI-triaged damage reports over a mobile app or WhatsApp within 72 hours of a sudden-onset disaster, in all six official UN languages, fully offline-capable.",
 		accent: "#F59E0B",
 		results: [
+			"90.2% AI damage-severity accuracy (MEDIC-trained)",
 			"500,000+ report capacity per crisis",
-			"All 6 UN languages via AI translation",
-			"Offline-first mobile with GPS tagging",
-			"Real-time GeoJSON & CSV export to UNDP"
+			"All 6 UN languages, including RTL Arabic",
+			"Mobile PWA + WhatsApp — zero app install"
 		],
 		services: ["Custom Development"],
 		challenge: {
-			headline: "72 hours to understand a disaster. No tool existed.",
-			body: "UNDP's RAPIDA methodology required community-sourced damage data within 72 hours of a crisis event to guide early recovery resource allocation. No single tool existed that was simultaneously multilingual, offline-capable, scalable to 500,000+ reports per crisis, and exportable in UNDP's standard interoperable formats — and deployable across hundreds of crises per year without per-crisis configuration.",
+			headline: "Satellites see the damage. They can't see the ground.",
+			body: "RAPIDA fuses satellite imagery, night-light data, and social signals into a 72-hour early recovery picture — but that picture is built from orbit, and structured, ground-level confirmation remains days away due to logistical constraints. Humanitarian teams needed a way to pull community-sourced, geolocated field reports into that same 72-hour window, at a scale and reliability no existing tool offered.",
 			points: [
-				"72-hour assessment window — but field survey tools required days to configure and deploy",
+				"72-hour assessment window — but field survey tools took days to configure and deploy",
 				"Communities span Arabic, Chinese, French, Russian, Spanish, and English — no single tool supported all six",
-				"Low and zero connectivity environments in the most affected areas",
-				"Existing tools broke at 50,000 submissions — UNDP needed 500,000+ per crisis, 100s of crises per year",
-				"Outputs needed to be in GeoJSON, CSV, and shapefile formats for UNDP geospatial systems"
+				"Most-affected areas are also the least connected — low and zero connectivity by default",
+				"Existing tools broke well before 50,000 submissions — Faraja needed to hold 500,000+ per crisis, across hundreds of crises a year",
+				"Photo evidence arrived faster than any team could manually review it"
 			]
 		},
 		solution: {
-			headline: "End-to-end crowdsourced crisis assessment.",
-			body: "Kaistrum built an open-source, end-to-end platform: a community-facing app accepting photo, GPS, and damage classification submissions via smartphone or WhatsApp; an AI-assisted translation and image classification pipeline; and a backend dashboard with live map and structured data export.",
+			headline: "An open-source ground-truth layer for RAPIDA.",
+			body: "Kaistrum built Faraja as a fully open-source, seven-service platform: a mobile-first PWA and an automated WhatsApp bot for zero-barrier community intake; a Redis-backed queue that triages every photo through a purpose-trained AI model; three-tier geospatial deduplication with building-level versioning; and a live coordinator dashboard with responder dispatch — producing structured, RAPIDA-ready data within seconds of submission.",
 			components: [
 				{
-					title: "Community submission app",
+					title: "Reporters app + WhatsApp bot",
 					description:
-						"Web and WhatsApp-based submission flow accepting photos, GPS coordinates, damage classification, and infrastructure type — in all 6 UN languages with AI-assisted translation of free-text descriptions."
+						"A guided, multi-step survey delivered as a mobile PWA carousel, mirrored step-for-step by a WhatsApp bot with native location and photo sharing — no app install required, fully localised into all 6 UN languages with RTL Arabic support."
 				},
 				{
-					title: "Building footprint map overlay",
+					title: "AI damage triage",
 					description:
-						"Interactive map with building footprints from OpenStreetMap and UNDP datasets — allowing submitters to geolocate damage to specific structures without needing precise GPS."
+						"A multi-task ResNet18 model, fine-tuned on 71,198 real disaster images from the MEDIC benchmark, classifies every submitted photo for disaster type, informativeness, humanitarian category, and damage severity — 90.2% accuracy, 20–30ms per image."
 				},
 				{
-					title: "AI image classification",
+					title: "Three-tier deduplication & versioning",
 					description:
-						"Computer vision pipeline classifying submitted photos as minimal, partial, or complete damage — reducing analyst review burden and enabling automated batch processing."
+						"Cascading dedup — exact client-ID match, photo+coordinate proximity within 60 seconds, and 50-metre spatial matching within a 48-hour window — paired with building-level versioning so coordinators always see the latest report without losing submission history."
 				},
 				{
-					title: "Scalable backend",
+					title: "Burst-resilient queue",
 					description:
-						"PostgreSQL/PostGIS backend with horizontal scaling — load-tested to 500,000 concurrent report submissions. Structured for reuse across hundreds of crisis deployments per year."
+						"A BullMQ + Redis queue with append-only-file persistence absorbs submission bursts and processes reports across concurrent workers, retrying failed jobs automatically — no data lost, even through a service restart."
 				},
 				{
-					title: "Analytics dashboard",
+					title: "Coordinator dashboard & dispatch",
 					description:
-						"Live GIS dashboard displaying submissions with geolocation, damage level, and infrastructure type — with one-click export to GeoJSON, CSV, and shapefile."
+						"A live, clustered incident map with AI-weighted zone scoring, a conversational assistant for situation summaries, and Haversine-ranked responder dispatch with optimised multi-stop routing to the field."
+				},
+				{
+					title: "RAPIDA-ready export",
+					description:
+						"PostGIS-backed spatial storage with GIST indexing, exportable on demand as GeoJSON, CSV, Shapefile, or via REST API — structured to feed directly into RAPIDA's geospatial workflows."
 				}
 			]
 		},
 		outcomes: [
 			{
+				value: "90.2%",
+				label: "AI damage-severity accuracy",
+				description:
+					"Fine-tuned ResNet18 on the MEDIC benchmark (71,198 real disaster images), with 94% recall on severe damage."
+			},
+			{
 				value: "500k+",
 				label: "Report capacity per crisis",
 				description:
-					"Backend load-tested to 500,000 concurrent submissions — matching UNDP's large-scale crisis requirement."
+					"Architecture scales from a single VPS to a 4+ replica, read-replica deployment for national-scale crises."
 			},
 			{
 				value: "6",
 				label: "UN languages",
 				description:
-					"All six official UN languages supported via AI-assisted translation — no manual localisation required."
-			},
-			{
-				value: "72hr",
-				label: "Deployment readiness",
-				description:
-					"Platform can be activated for a new crisis in under 72 hours with no per-crisis configuration."
+					"All six official UN languages, including full RTL Arabic support, across both the web app and WhatsApp bot."
 			},
 			{
 				value: "100%",
 				label: "Offline capable",
 				description:
-					"Submissions cached locally and synced when connectivity returns — functional with zero internet."
+					"Reports and photos queue on-device and sync automatically the moment connectivity returns."
 			}
 		],
 		imagePlaceholders: {
-			wide: "RAPIDA crisis damage map — geolocated community submissions",
-			narrow: "Damage assessment mobile submission flow"
-		}
+			wide: "Faraja coordinator dashboard — live clustered damage map",
+			narrow: "Faraja reporters app — mobile damage submission flow"
+		},
+		videoEmbed:
+			'<iframe width="560" height="315" src="https://www.youtube.com/embed/wYn9VTzgZno?si=Uv2-ccMSBZcrUviW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+		narrowVideo: "/REC_REPORTERS.mp4",
+		thumbnail: "/faraja-logo.png"
 	}
 ];
 
