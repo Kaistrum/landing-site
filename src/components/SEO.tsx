@@ -23,7 +23,7 @@ export default function SEO({
 	jsonLd,
 	noIndex = false
 }: Props) {
-	const fullTitle = title.includes("Kaistrum") ? title : `${title} — Kaistrum`;
+	const fullTitle = title.includes("Kairos") ? title : `${title} — Kairos`;
 	const canonical = `${BASE_URL}${path}`;
 	const ogImageAbsolute = `${BASE_URL}${ogImage}`;
 
@@ -40,7 +40,7 @@ export default function SEO({
 			<meta property="og:type" content={type} />
 			<meta property="og:url" content={canonical} />
 			<meta property="og:image" content={ogImageAbsolute} />
-			<meta property="og:site_name" content="Kaistrum" />
+			<meta property="og:site_name" content="Kairos Spatial Solutions" />
 			<meta property="og:locale" content="en_GB" />
 
 			{/* Twitter */}
@@ -70,7 +70,7 @@ export function orgSchema() {
 	return {
 		"@context": "https://schema.org",
 		"@type": "Organization",
-		name: "Kaistrum",
+		name: "Kairos Spatial Solutions",
 		url: BASE_URL,
 		logo: `${BASE_URL}/logo.png`,
 		description:
@@ -88,7 +88,7 @@ export function websiteSchema() {
 	return {
 		"@context": "https://schema.org",
 		"@type": "WebSite",
-		name: "Kaistrum",
+		name: "Kairos Spatial Solutions",
 		url: BASE_URL,
 		potentialAction: {
 			"@type": "SearchAction",
@@ -121,7 +121,7 @@ export function serviceSchema(name: string, description: string) {
 		description,
 		provider: {
 			"@type": "Organization",
-			name: "Kaistrum",
+			name: "Kairos Spatial Solutions",
 			url: BASE_URL
 		},
 		areaServed: "Worldwide",
@@ -144,7 +144,7 @@ export function articleSchema(opts: {
 		datePublished: opts.datePublished,
 		publisher: {
 			"@type": "Organization",
-			name: "Kaistrum",
+			name: "Kairos Spatial Solutions",
 			logo: { "@type": "ImageObject", url: `${BASE_URL}/logo.png` }
 		}
 	};

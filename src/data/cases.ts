@@ -1,6 +1,7 @@
 /* Shared case study data used by the home section, listing page, and individual pages */
 
-export type CaseStudyData = {
+/* Fields every case study carries, and all the listing surfaces need */
+export type CaseStudySummary = {
 	slug: string;
 	tag: string;
 	industry: string;
@@ -12,6 +13,19 @@ export type CaseStudyData = {
 	accent: string;
 	results: string[];
 	services: string[];
+	imagePlaceholders: { wide: string; narrow: string };
+	thumbnail?: string;
+	/* Slug of the Kaistrum product this study proves, from products.ts.
+	   Absent when the study has not been assigned to a product. Never guess
+	   one: an absent field is the correct state. */
+	product?: string;
+	/* Set when the study has its own hand-built route instead of the
+	   shared [slug] template, so the template skips it */
+	customPage?: boolean;
+};
+
+/* Studies rendered by the shared [slug] template carry the full narrative */
+export type CaseStudyData = CaseStudySummary & {
 	challenge: {
 		headline: string;
 		body: string;
@@ -32,13 +46,11 @@ export type CaseStudyData = {
 		name: string;
 		title: string;
 	};
-	imagePlaceholders: { wide: string; narrow: string };
 	videoEmbed?: string;
 	narrowVideo?: string;
-	thumbnail?: string;
 };
 
-const cases: CaseStudyData[] = [
+const cases: (CaseStudyData | CaseStudySummary)[] = [
 	{
 		slug: "faraja",
 		tag: "Humanitarian · Crisis Response Tech",
@@ -48,7 +60,7 @@ const cases: CaseStudyData[] = [
 		year: "2026",
 		title: "Faraja: Crowdsourced Crisis Damage Assessment",
 		summary:
-			"UNDP's RAPIDA methodology delivers early recovery insight from satellite imagery, night-light data, and social media — but ground-level, structured field data still takes days to arrive. Kaistrum built Faraja to close that gap: an open-source, end-to-end platform that lets communities submit geolocated, AI-triaged damage reports over a mobile app or WhatsApp within 72 hours of a sudden-onset disaster, in all six official UN languages, fully offline-capable.",
+			"UNDP's RAPIDA methodology delivers early recovery insight from satellite imagery, night-light data, and social media — but ground-level, structured field data still takes days to arrive. Kairos Spatial Solutions built Faraja to close that gap: an open-source, end-to-end platform that lets communities submit geolocated, AI-triaged damage reports over a mobile app or WhatsApp within 72 hours of a sudden-onset disaster, in all six official UN languages, fully offline-capable.",
 		accent: "#F59E0B",
 		results: [
 			"90.2% AI damage-severity accuracy (MEDIC-trained)",
@@ -70,7 +82,7 @@ const cases: CaseStudyData[] = [
 		},
 		solution: {
 			headline: "An open-source ground-truth layer for RAPIDA.",
-			body: "Kaistrum built Faraja as a fully open-source, seven-service platform: a mobile-first PWA and an automated WhatsApp bot for zero-barrier community intake; a Redis-backed queue that triages every photo through a purpose-trained AI model; three-tier geospatial deduplication with building-level versioning; and a live coordinator dashboard with responder dispatch — producing structured, RAPIDA-ready data within seconds of submission.",
+			body: "Kairos built Faraja as a fully open-source, seven-service platform: a mobile-first PWA and an automated WhatsApp bot for zero-barrier community intake; a Redis-backed queue that triages every photo through a purpose-trained AI model; three-tier geospatial deduplication with building-level versioning; and a live coordinator dashboard with responder dispatch — producing structured, RAPIDA-ready data within seconds of submission.",
 			components: [
 				{
 					title: "Reporters app + WhatsApp bot",
@@ -138,6 +150,31 @@ const cases: CaseStudyData[] = [
 			'<iframe width="560" height="315" src="https://www.youtube.com/embed/wYn9VTzgZno?si=Uv2-ccMSBZcrUviW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
 		narrowVideo: "/REC_REPORTERS.mp4",
 		thumbnail: "/faraja-logo.png"
+	},
+	{
+		slug: "gold-prospectivity-kakamega",
+		tag: "Mining · Mineral Exploration",
+		industry: "Mining & Natural Resources",
+		client: "Esri Eastern Africa programme",
+		location: "Kakamega County, Kenya",
+		year: "2026",
+		title: "Gold Prospectivity Mapping, Kakamega County",
+		summary:
+			"Machine learning targeting across the Busia-Kakamega Greenstone Belt. Two independent models were trained on 61 predictor layers and 68 confirmed gold occurrences, then validated on ground the models had never seen, to rank where exploration should look first.",
+		accent: "#B45309",
+		results: [
+			"61 predictor layers across four data streams",
+			"0.981 ranking score on held-out ground",
+			"Zero of 68 known occurrences missed",
+			"226.5 km² ranked high priority"
+		],
+		services: ["Custom Development"],
+		product: "minerals",
+		imagePlaceholders: {
+			wide: "Gold prospectivity map of Kakamega County, five classes from Very Low to Very High",
+			narrow: "Support Vector Machine prospectivity map, Liranda Corridor detail"
+		},
+		customPage: true
 	}
 ];
 

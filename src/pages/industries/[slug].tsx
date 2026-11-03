@@ -1,10 +1,12 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import SEO, { breadcrumbSchema } from "@/components/SEO";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowLeft, Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import cases from "@/data/cases";
 
 /* ── Data types ── */
 type IndustryData = {
@@ -17,7 +19,11 @@ type IndustryData = {
   challenges: { title: string; description: string }[];
   solutions: { title: string; description: string }[];
   useCases: { title: string; description: string }[];
-  imagePlaceholders: { wide: string; narrow: string };
+  /* Context photography, not screenshots of our work. The files live at
+     /industries/<slug>-wide.jpg and -narrow.jpg, so only the descriptions
+     belong here. Each one describes what is in the frame and claims nothing
+     about who built it or who the client was. */
+  images: { wideAlt: string; narrowAlt: string };
 };
 
 /* ── All industry content ── */
@@ -28,7 +34,7 @@ const industries: IndustryData[] = [
     name: "Government & Defense",
     headline: "Geospatial intelligence for the organisations that run the world.",
     description:
-      "From national cadastres to defence situational awareness, governments operate on location data. Kaistrum delivers the GIS platforms and security posture that public-sector operations require.",
+      "From national cadastres to defence situational awareness, governments operate on location data. Kairos delivers the GIS platforms and security posture that public-sector operations require.",
     stats: [
       { value: "180+", label: "government deployments" },
       { value: "100%", label: "data sovereignty options" },
@@ -105,9 +111,11 @@ const industries: IndustryData[] = [
           "Spatial permit workflows — from application submission to compliance inspection — with zoning layer analysis at every stage.",
       },
     ],
-    imagePlaceholders: {
-      wide: "National GIS operations centre",
-      narrow: "Field command mapping tablet",
+    images: {
+      wideAlt:
+        "An operator at a workstation in a control room, with aerial imagery and system displays on the screens around them.",
+      narrowAlt:
+        "A figure in helmet and tactical gear silhouetted against a sunset sky.",
     },
   },
   {
@@ -116,7 +124,7 @@ const industries: IndustryData[] = [
     name: "Utilities & Infrastructure",
     headline: "The network that powers everything needs a map that keeps up.",
     description:
-      "Power grids, water networks, and gas pipelines are invisible to the people who depend on them — until something fails. Kaistrum makes them visible, manageable, and resilient.",
+      "Power grids, water networks, and gas pipelines are invisible to the people who depend on them — until something fails. Kairos makes them visible, manageable, and resilient.",
     stats: [
       { value: "6,800km+", label: "networks managed" },
       { value: "60%", label: "avg fault response improvement" },
@@ -193,9 +201,11 @@ const industries: IndustryData[] = [
           "Automated condition and inventory reports for regulatory submission — generated from GIS data with complete audit trails.",
       },
     ],
-    imagePlaceholders: {
-      wide: "Power grid network GIS dashboard",
-      narrow: "Field inspection mobile app",
+    images: {
+      wideAlt:
+        "An aerial view of a high voltage electrical substation.",
+      narrowAlt:
+        "Two workers inspecting equipment at an outdoor electrical substation.",
     },
   },
   {
@@ -281,9 +291,11 @@ const industries: IndustryData[] = [
           "Spatial modelling of inter-site interference patterns and shadow zones to optimise antenna configuration across the network.",
       },
     ],
-    imagePlaceholders: {
-      wide: "Telecoms coverage & network GIS map",
-      narrow: "RF propagation model overlay",
+    images: {
+      wideAlt:
+        "A telecommunications mast silhouetted above a misty city at twilight.",
+      narrowAlt:
+        "Two technicians working near the top of a cellular tower.",
     },
   },
   {
@@ -292,7 +304,7 @@ const industries: IndustryData[] = [
     name: "Transportation & Logistics",
     headline: "Networks that move the world need spatial intelligence to run efficiently.",
     description:
-      "Roads, rail, ports, and logistics corridors are fundamentally spatial assets. Kaistrum gives transport operators the GIS to plan, monitor, and maintain them at scale.",
+      "Roads, rail, ports, and logistics corridors are fundamentally spatial assets. Kairos gives transport operators the GIS to plan, monitor, and maintain them at scale.",
     stats: [
       { value: "National", label: "network analysis" },
       { value: "30%", label: "avg cost reduction in routing" },
@@ -369,9 +381,11 @@ const industries: IndustryData[] = [
           "Spatial clustering of collision records to identify high-risk locations, correlate with infrastructure factors, and prioritise interventions.",
       },
     ],
-    imagePlaceholders: {
-      wide: "National transport network GIS",
-      narrow: "Route optimisation dashboard",
+    images: {
+      wideAlt:
+        "An aerial view of a multi level highway interchange.",
+      narrowAlt:
+        "A top down view of highways and roundabouts threading through greenery.",
     },
   },
   {
@@ -457,9 +471,11 @@ const industries: IndustryData[] = [
           "Progressive rehabilitation tracking against licence commitments — satellite-derived cover estimates validated against field surveys.",
       },
     ],
-    imagePlaceholders: {
-      wide: "Mine site GIS with geological overlays",
-      narrow: "Environmental compliance monitoring",
+    images: {
+      wideAlt:
+        "An aerial view of haul roads winding through an open pit mine.",
+      narrowAlt:
+        "An aerial view of an open pit mine with haul trucks working the benches.",
     },
   },
   {
@@ -468,7 +484,7 @@ const industries: IndustryData[] = [
     name: "Agriculture",
     headline: "From satellite to smallholder — precision at every scale.",
     description:
-      "Agriculture operates at scales that defy manual monitoring — millions of hectares, millions of farmers, seasons that wait for no one. Kaistrum brings GIS and remote sensing to bear on food security.",
+      "Agriculture operates at scales that defy manual monitoring — millions of hectares, millions of farmers, seasons that wait for no one. Kairos brings GIS and remote sensing to bear on food security.",
     stats: [
       { value: "2.1M+", label: "hectares monitored" },
       { value: "5-day", label: "Sentinel-2 analysis cadence" },
@@ -545,9 +561,11 @@ const industries: IndustryData[] = [
           "SMS-based drought and flood risk alerts derived from GIS analysis — delivered to smallholder farmers with no smartphone or internet access.",
       },
     ],
-    imagePlaceholders: {
-      wide: "Crop health monitoring — NDVI satellite imagery",
-      narrow: "Field-level irrigation prescription map",
+    images: {
+      wideAlt:
+        "An aerial view of farmland divided into differently cropped fields.",
+      narrowAlt:
+        "An aerial view of patterned agricultural fields.",
     },
   },
   {
@@ -556,7 +574,7 @@ const industries: IndustryData[] = [
     name: "NGOs & Non-profits",
     headline: "When the stakes are humanitarian, there is no tolerance for a map that lies.",
     description:
-      "NGOs operate in the most demanding GIS environments on earth — low connectivity, multi-language teams, tight resources, and decisions that affect lives. Kaistrum builds tools that work where it counts.",
+      "NGOs operate in the most demanding GIS environments on earth — low connectivity, multi-language teams, tight resources, and decisions that affect lives. Kairos builds tools that work where it counts.",
     stats: [
       { value: "72hr", label: "rapid deployment capability" },
       { value: "Offline", label: "first field tools" },
@@ -633,9 +651,11 @@ const industries: IndustryData[] = [
           "Before-and-after spatial analysis quantifying the geographic reach and coverage of programme interventions.",
       },
     ],
-    imagePlaceholders: {
-      wide: "Humanitarian field data collection — community mapping",
-      narrow: "Crisis damage assessment dashboard",
+    images: {
+      wideAlt:
+        "An overhead view of a rural settlement beside a river, with footpaths and small structures.",
+      narrowAlt:
+        "An aerial view of homesteads in a rural village.",
     },
   },
   {
@@ -644,7 +664,7 @@ const industries: IndustryData[] = [
     name: "Smart Cities",
     headline: "A city is a system. GIS is how you see the whole of it at once.",
     description:
-      "Cities generate more spatial data than any other environment — and most of it is siloed, stale, or inaccessible to the people who need it. Kaistrum connects the dots.",
+      "Cities generate more spatial data than any other environment — and most of it is siloed, stale, or inaccessible to the people who need it. Kairos connects the dots.",
     stats: [
       { value: "3D", label: "digital twin capable" },
       { value: "Real-time", label: "IoT sensor integration" },
@@ -721,9 +741,11 @@ const industries: IndustryData[] = [
           "Spatial integration of air quality, noise, and flood risk data for evidence-based urban planning and public health reporting.",
       },
     ],
-    imagePlaceholders: {
-      wide: "Smart city 3D digital twin dashboard",
-      narrow: "Urban IoT sensor monitoring map",
+    images: {
+      wideAlt:
+        "An aerial view of a city skyline at night, with lit roads running between the buildings.",
+      narrowAlt:
+        "An aerial view of a densely built city lit at night.",
     },
   },
   {
@@ -809,9 +831,11 @@ const industries: IndustryData[] = [
           "Spatial analysis of population and ecosystem exposure to flood, drought, heat, and sea-level rise under IPCC scenario projections.",
       },
     ],
-    imagePlaceholders: {
-      wide: "Forest cover change detection — satellite time series",
-      narrow: "Species distribution modelling map",
+    images: {
+      wideAlt:
+        "An aerial view of a river running through dense forest.",
+      narrowAlt:
+        "An aerial view of an unbroken forest canopy.",
     },
   },
   {
@@ -820,7 +844,7 @@ const industries: IndustryData[] = [
     name: "Disaster Response",
     headline: "When everything fails, the map is the last thing that should.",
     description:
-      "Crisis response operates under the most demanding conditions GIS will ever face. Kaistrum builds the tools and deploys the platforms that work when infrastructure doesn't.",
+      "Crisis response operates under the most demanding conditions GIS will ever face. Kairos builds the tools and deploys the platforms that work when infrastructure doesn't.",
     stats: [
       { value: "72hr", label: "post-event damage assessment" },
       { value: "Satellite", label: "imagery analysis pre-field" },
@@ -862,7 +886,7 @@ const industries: IndustryData[] = [
       {
         title: "Humanitarian data exchange integration",
         description:
-          "Data outputs in COD, HXL, and HDX-compatible formats so Kaistrum data feeds directly into the humanitarian coordination ecosystem.",
+          "Data outputs in COD, HXL, and HDX-compatible formats so Kairos data feeds directly into the humanitarian coordination ecosystem.",
       },
       {
         title: "AI-assisted crowdsource validation",
@@ -897,9 +921,11 @@ const industries: IndustryData[] = [
           "Satellite change detection tracking rebuilding activity and infrastructure restoration over weeks and months following a crisis event.",
       },
     ],
-    imagePlaceholders: {
-      wide: "Crisis damage assessment satellite imagery analysis",
-      narrow: "Field evacuation route GIS",
+    images: {
+      wideAlt:
+        "An aerial view of an urban area with streets and buildings under floodwater.",
+      narrowAlt:
+        "Emergency workers laying sandbags on a flooded residential street.",
     },
   },
 ];
@@ -927,76 +953,75 @@ function Reveal({
 }
 
 /* ── Wide image placeholder ── */
-function WidePlaceholder({ label }: { label: string }) {
+function WideImage({ slug, alt }: { slug: string; alt: string }) {
   return (
     <div
-      className="relative w-full flex items-center justify-center overflow-hidden"
+      className="relative w-full overflow-hidden"
       style={{
         aspectRatio: "21/6",
         background: "var(--bg-card)",
         borderTop: "1px solid var(--border)",
         borderBottom: "1px solid var(--border)",
       }}>
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ opacity: 0.04 }}
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true">
-        <defs>
-          <pattern id="wide-grid" width="50" height="50" patternUnits="userSpaceOnUse">
-            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#wide-grid)" style={{ color: "var(--accent)" }} />
-      </svg>
-      <p
-        className="relative text-[11px] uppercase tracking-[0.22em] font-medium"
-        style={{ color: "var(--text-muted)" }}>
-        {label}
-      </p>
+      <Image
+        src={`/industries/${slug}-wide.jpg`}
+        alt={alt}
+        fill
+        sizes="100vw"
+        className="object-cover"
+      />
+      {/* Settles the photograph into the page rather than letting it sit on
+          top of it, the way the hero image is handled */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.5))",
+        }}
+      />
     </div>
   );
 }
 
-/* ── Narrow image placeholder ── */
-function NarrowPlaceholder({ label }: { label: string }) {
+/* ── Narrow photograph ── */
+function NarrowImage({ slug, alt }: { slug: string; alt: string }) {
   return (
     <div
-      className="relative w-full flex flex-col items-center justify-center gap-3 overflow-hidden"
+      className="relative w-full overflow-hidden"
       style={{
         aspectRatio: "4/3",
         background: "var(--bg-card)",
         border: "1px solid var(--border)",
       }}>
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ opacity: 0.04 }}
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true">
-        <defs>
-          <pattern id="narrow-grid" width="30" height="30" patternUnits="userSpaceOnUse">
-            <path d="M 30 0 L 0 0 0 30" fill="none" stroke="currentColor" strokeWidth="0.5" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#narrow-grid)" style={{ color: "var(--accent)" }} />
-      </svg>
-      <p
-        className="relative text-[10px] uppercase tracking-[0.2em] font-medium px-4 text-center"
-        style={{ color: "var(--text-muted)" }}>
-        {label}
-      </p>
+      <Image
+        src={`/industries/${slug}-narrow.jpg`}
+        alt={alt}
+        fill
+        sizes="(max-width: 1024px) 100vw, 33vw"
+        className="object-cover"
+      />
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.25), transparent 50%, rgba(0,0,0,0.4))",
+        }}
+      />
     </div>
   );
 }
 
 /* ── Page ── */
 const IndustryPage: NextPage<{ industry: IndustryData }> = ({ industry }) => {
+  /* Case studies tagged to this industry, matched on the shared industry name */
+  const industryCases = cases.filter((c) => c.industry === industry.name);
+
   const padded = String(industry.index).padStart(2, "0");
 
   return (
     <>
       <SEO
-        title={`${industry.name} GIS Solutions — Kaistrum`}
+        title={`${industry.name} GIS — Kairos`}
         description={industry.description}
         path={`/industries/${industry.slug}`}
         jsonLd={breadcrumbSchema([
@@ -1179,7 +1204,7 @@ const IndustryPage: NextPage<{ industry: IndustryData }> = ({ industry }) => {
         </section>
 
         {/* ── Wide image placeholder ── */}
-        <WidePlaceholder label={industry.imagePlaceholders.wide} />
+        <WideImage slug={industry.slug} alt={industry.images.wideAlt} />
 
         {/* ── How we help ── */}
         <section
@@ -1198,7 +1223,7 @@ const IndustryPage: NextPage<{ industry: IndustryData }> = ({ industry }) => {
                   color: "var(--text)",
                   fontSize: "clamp(1.75rem, 3.5vw, 3rem)",
                 }}>
-                What Kaistrum delivers.
+                What Kairos delivers.
               </h2>
             </Reveal>
 
@@ -1238,7 +1263,10 @@ const IndustryPage: NextPage<{ industry: IndustryData }> = ({ industry }) => {
 
               {/* Narrow image placeholder */}
               <Reveal delay={0.1} className="lg:sticky lg:top-28">
-                <NarrowPlaceholder label={industry.imagePlaceholders.narrow} />
+                <NarrowImage
+                  slug={industry.slug}
+                  alt={industry.images.narrowAlt}
+                />
               </Reveal>
             </div>
           </div>
@@ -1303,6 +1331,87 @@ const IndustryPage: NextPage<{ industry: IndustryData }> = ({ industry }) => {
             </div>
           </div>
         </section>
+
+        {/* ── Case studies in this industry ── */}
+        {industryCases.length > 0 && (
+          <section
+            className="py-20 md:py-28 px-4 md:px-6 border-b"
+            style={{ background: "var(--bg)", borderColor: "var(--border)" }}>
+            <div className="max-w-6xl mx-auto">
+              <Reveal>
+                <p
+                  className="text-[10px] uppercase tracking-[0.24em] mb-4 font-semibold"
+                  style={{ color: "var(--accent)" }}>
+                  Case studies
+                </p>
+                <h2
+                  className="font-semibold leading-[0.97] mb-14"
+                  style={{
+                    color: "var(--text)",
+                    fontSize: "clamp(1.75rem, 3.5vw, 3rem)",
+                  }}>
+                  Work we have shipped.
+                </h2>
+              </Reveal>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {industryCases.map((c, i) => (
+                  <Reveal key={c.slug} delay={i * 0.08}>
+                    <Link
+                      href={`/case-studies/${c.slug}`}
+                      className="group flex flex-col h-full border p-6 md:p-7 transition-colors duration-200"
+                      style={{
+                        background: "var(--bg-card)",
+                        borderColor: "var(--border)",
+                      }}>
+                      <p
+                        className="text-[10px] uppercase tracking-[0.18em] font-semibold mb-3"
+                        style={{ color: c.accent }}>
+                        {c.tag}
+                      </p>
+                      <h3
+                        className="text-base md:text-lg font-semibold leading-snug mb-3"
+                        style={{ color: "var(--text)" }}>
+                        {c.title}
+                      </h3>
+                      <p
+                        className="text-sm leading-[1.7] mb-5 flex-1"
+                        style={{ color: "var(--text-dim)" }}>
+                        {c.summary}
+                      </p>
+                      <ul
+                        className="flex flex-col gap-1.5 border-t pt-4 mb-5"
+                        style={{ borderColor: "var(--border)" }}>
+                        {c.results.slice(0, 3).map((r) => (
+                          <li
+                            key={r}
+                            className="flex items-start gap-2 text-xs leading-[1.6]"
+                            style={{ color: "var(--text-dim)" }}>
+                            <span
+                              className="w-1.5 h-1.5 shrink-0 mt-1.5"
+                              style={{ background: c.accent }}
+                              aria-hidden="true"
+                            />
+                            {r}
+                          </li>
+                        ))}
+                      </ul>
+                      <span
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold"
+                        style={{ color: c.accent }}>
+                        Read full case study
+                        <ArrowRight
+                          size={12}
+                          className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
+                        />
+                      </span>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ── CTA ── */}
         <section

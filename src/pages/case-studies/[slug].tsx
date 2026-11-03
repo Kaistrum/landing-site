@@ -95,7 +95,7 @@ const CaseStudyPage: NextPage<Props> = ({ caseStudy: c }) => {
 	return (
 		<>
 			<SEO
-				title={`${c.title} — Kaistrum Case Study`}
+				title={`${c.title} Case Study — Kairos`}
 				description={c.summary}
 				path={`/case-studies/${c.slug}`}
 				type="article"
@@ -553,7 +553,7 @@ const CaseStudyPage: NextPage<Props> = ({ caseStudy: c }) => {
 							<p
 								className="text-[10px] uppercase tracking-[0.22em] font-semibold mb-4"
 								style={{ color: c.accent }}>
-								Work with Kaistrum
+								Work with Kairos
 							</p>
 							<h2
 								className="text-2xl md:text-3xl font-semibold leading-tight max-w-md"
@@ -598,14 +598,19 @@ const CaseStudyPage: NextPage<Props> = ({ caseStudy: c }) => {
 	);
 };
 
+/* Studies with a hand-built route render there, not through this template */
+const templateCases = cases.filter(
+	(c): c is CaseStudyData => !c.customPage
+);
+
 export const getStaticPaths: GetStaticPaths = async () => {
-	const paths = cases.map((c) => ({ params: { slug: c.slug } }));
+	const paths = templateCases.map((c) => ({ params: { slug: c.slug } }));
 	return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 	const slug = params?.slug as string;
-	const caseStudy = cases.find((c) => c.slug === slug);
+	const caseStudy = templateCases.find((c) => c.slug === slug);
 	if (!caseStudy) return { notFound: true };
 	return { props: { caseStudy } };
 };

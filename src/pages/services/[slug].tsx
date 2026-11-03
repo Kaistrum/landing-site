@@ -129,7 +129,7 @@ const services: ServiceData[] = [
 		],
 		secondSection: {
 			title: "Benchmarked before you sign off.",
-			body: "Every Kaistrum deployment goes through a structured performance validation phase before handover. We simulate your expected peak concurrent users and data volumes, then provide a benchmark report showing response times, throughput, and resource utilisation — so you know exactly what you are signing off on.",
+			body: "Every Kairos deployment goes through a structured performance validation phase before handover. We simulate your expected peak concurrent users and data volumes, then provide a benchmark report showing response times, throughput, and resource utilisation — so you know exactly what you are signing off on.",
 			placeholder: "Performance benchmark dashboard",
 			points: [
 				"Load testing against peak concurrent user scenarios",
@@ -517,7 +517,7 @@ const services: ServiceData[] = [
 			placeholder: "On-site GIS training workshop",
 			points: [
 				"Maximum 12 delegates per instructor for effective hands-on delivery",
-				"Training environment provisioned and configured by Kaistrum",
+				"Training environment provisioned and configured by Kairos",
 				"All materials remain with you after the course",
 				"Optional certification pathway for key personnel"
 			]
@@ -529,7 +529,7 @@ const services: ServiceData[] = [
 		category: "SUPPORT",
 		headline: "24/7 expert support, whenever you need it.",
 		description:
-			"Every Kaistrum client gets SLA-backed technical support with a dedicated account manager, remote diagnostics, and proactive platform monitoring.",
+			"Every Kairos client gets SLA-backed technical support with a dedicated account manager, remote diagnostics, and proactive platform monitoring.",
 		overview: {
 			title: "Support that prevents problems, not just resolves them.",
 			body: "Most GIS vendors are reactive — they wait for you to raise a ticket. Our support model is built around proactive monitoring so we frequently know about an emerging issue before you do. Combine that with SLA-backed response times and a dedicated support engineer who knows your environment, and you get a fundamentally different support experience.",
@@ -612,7 +612,7 @@ const services: ServiceData[] = [
 			body: "When you open a support ticket, your dedicated engineer already has your platform configuration, deployment architecture, and historical incident log in front of them. We maintain living documentation of every environment we support — so there is no time wasted re-explaining your setup, and no risk of a junior engineer making a change that conflicts with your configuration.",
 			placeholder: "Remote diagnostics session",
 			points: [
-				"Living environment documentation maintained by Kaistrum",
+				"Living environment documentation maintained by Kairos",
 				"Named support engineer assigned to your account",
 				"No call-centre scripts — direct access to expert engineers",
 				"Post-incident reports for all Priority 1 and 2 tickets"
@@ -727,14 +727,14 @@ const ServicePage: NextPage<{ service: ServiceData }> = ({ service }) => {
 	return (
 		<>
 			<SEO
-				title={`${service.tab} — Kaistrum`}
+				title={`${service.tab} — Kairos`}
 				description={service.description}
 				path={`/services/${service.slug}`}
 				jsonLd={[
 					serviceSchema(service.tab, service.description),
 					breadcrumbSchema([
 						{ name: "Home", path: "/" },
-						{ name: "Services", path: "/#products" },
+						{ name: "Services", path: "/#services" },
 						{ name: service.tab, path: `/services/${service.slug}` }
 					])
 				]}
@@ -778,7 +778,7 @@ const ServicePage: NextPage<{ service: ServiceData }> = ({ service }) => {
 					<div className="max-w-6xl mx-auto relative">
 						<FadeUp delay={0.05}>
 							<Link
-								href="/#products"
+								href="/#services"
 								className="inline-flex items-center gap-2 text-xs font-medium mb-8 transition-colors duration-200"
 								style={{ color: "var(--text-muted)" }}
 								onMouseEnter={(e) =>
@@ -1093,7 +1093,7 @@ const ServicePage: NextPage<{ service: ServiceData }> = ({ service }) => {
 									<ArrowRight size={14} />
 								</Link>
 								<Link
-									href="/#products"
+									href="/#services"
 									className="text-sm transition-colors duration-200"
 									style={{ color: "var(--text-muted)" }}
 									onMouseEnter={(e) =>

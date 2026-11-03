@@ -64,7 +64,7 @@ export default function Footer() {
 						<Link
 							href="/"
 							className="flex items-center gap-2.5 mb-4"
-							aria-label="Kaistrum home">
+							aria-label="Kairos Spatial Solutions home">
 							<Image
 								src="/logo.png"
 								alt=""
@@ -75,7 +75,7 @@ export default function Footer() {
 							<span
 								className="text-xs font-bold tracking-widest uppercase"
 								style={{ color: "var(--text)" }}>
-								Kaistrum
+								Kairos
 							</span>
 						</Link>
 						<p
@@ -122,7 +122,7 @@ export default function Footer() {
 					className="border-t pt-8 flex flex-col sm:flex-row items-center justify-between gap-3"
 					style={{ borderColor: "var(--border)" }}>
 					<p className="text-xs" style={{ color: "var(--text-muted)" }}>
-						© {year} Kaistrum. All rights reserved.
+						© {year} Kairos Spatial Solutions. All rights reserved.
 					</p>
 					<p className="text-xs" style={{ color: "var(--text-muted)" }}>
 						hello@kaistrum.com

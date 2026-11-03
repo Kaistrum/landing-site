@@ -10,8 +10,8 @@ const Careers: NextPage = () => {
 	return (
 		<>
 			<SEO
-				title="Careers — Kaistrum"
-				description="Open roles at Kaistrum. We're a small team building enterprise GIS software for governments and utilities across Africa."
+				title="Careers — Kairos"
+				description="Open roles at Kairos Spatial Solutions. We're a small team building enterprise GIS software for governments and utilities across Africa."
 				path="/careers"
 				jsonLd={breadcrumbSchema([
 					{ name: "Home", path: "/" },

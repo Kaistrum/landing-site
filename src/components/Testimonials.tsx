@@ -5,19 +5,19 @@ import WordsPullUpMultiStyle from "./animations/WordsPullUpMultiStyle";
 const testimonials = [
   {
     quote:
-      "We replaced five separate GIS tools with Kaistrum and cut our licence cost by 35% in year one. The migration support was exceptional — they had our geodatabases running on Kaistrum Cloud within two weeks, with zero data loss.",
+      "We replaced five separate GIS tools with Kairos and cut our licence cost by 35% in year one. The migration support was exceptional — they had our geodatabases running on Kairos Cloud within two weeks, with zero data loss.",
     name: "Dr. Asha Wangari",
     title: "Director of Urban Planning, Nairobi County Government",
   },
   {
     quote:
-      "Kaistrum's field inspection app transformed how our crews work. Inspectors now capture gas leak reports with GPS coordinates, photos, and sensor readings in the field — and they sync to our control room in real time. What used to take two days of back-and-forth now takes fifteen minutes.",
+      "Kairos's field inspection app transformed how our crews work. Inspectors now capture gas leak reports with GPS coordinates, photos, and sensor readings in the field — and they sync to our control room in real time. What used to take two days of back-and-forth now takes fifteen minutes.",
     name: "James Ochieng",
     title: "GIS Manager, Kenya Pipeline Company",
   },
   {
     quote:
-      "The remote sensing module caught a landslide risk zone in our eastern corridor six weeks before the rainy season hit. That early warning gave us time to reroute crews and avoid what would have been a catastrophic outage. Kaistrum quite literally paid for itself that quarter.",
+      "The remote sensing module caught a landslide risk zone in our eastern corridor six weeks before the rainy season hit. That early warning gave us time to reroute crews and avoid what would have been a catastrophic outage. Kairos quite literally paid for itself that quarter.",
     name: "Fatuma Al-Hassan",
     title: "Head of Geospatial Operations, Tanzania TANESCO",
   },
@@ -108,7 +108,7 @@ export default function Testimonials() {
               segments={[
                 { text: "What GIS leaders say about", className: "font-semibold", style: { color: "var(--text)" } },
                 {
-                  text: " Kaistrum.",
+                  text: " Kairos.",
                   className: "font-normal italic",
                   style: { fontFamily: "'Instrument Serif', serif", color: "var(--text-dim)" },
                 },

@@ -13,7 +13,7 @@ const megamenus = {
 				heading: "COMPANY",
 				links: [
 					{ label: "About", sub: "Our mission and team", href: "/about" },
-					{ label: "Careers", sub: "Open roles at Kaistrum", href: "/careers" }
+					{ label: "Careers", sub: "Open roles at Kairos", href: "/careers" }
 				],
 				cta: { label: "Get in touch", href: "/#contact" }
 			}
@@ -60,7 +60,7 @@ const megamenus = {
 						href: "/services/support"
 					}
 				],
-				cta: { label: "All services", href: "/#products" }
+				cta: { label: "All services", href: "/#services" }
 			}
 		]
 	},
@@ -139,6 +139,7 @@ const navItems: NavEntry[] = [
 	{ kind: "mega", label: "Services" },
 	{ kind: "mega", label: "Industries" },
 	{ kind: "mega", label: "Company" },
+	{ kind: "link", label: "Products", href: "/products" },
 	{ kind: "link", label: "Case Studies", href: "/case-studies" },
 	{ kind: "link", label: "Contact", href: "/#contact" }
 ];
@@ -265,7 +266,7 @@ export default function Header() {
 					<Link
 						href="/"
 						className="flex items-center gap-2.5"
-						aria-label="Kaistrum home">
+						aria-label="Kairos Spatial Solutions home">
 						<Image
 							src="/logo.png"
 							alt=""
@@ -277,7 +278,7 @@ export default function Header() {
 						<span
 							className="text-lg font-bold tracking-widest uppercase"
 							style={{ color: "var(--text)" }}>
-							Kaistrum
+							Kairos
 						</span>
 					</Link>
 				</div>

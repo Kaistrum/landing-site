@@ -8,6 +8,8 @@ import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import cases from "@/data/cases";
+import products from "@/data/products";
+import ProductGraphic from "@/components/products/ProductGraphic";
 
 const ALL_INDUSTRIES = "All";
 
@@ -25,6 +27,10 @@ function CaseCard({
 }) {
 	const ref = useRef<HTMLDivElement>(null);
 	const isInView = useInView(ref, { once: true, margin: "-60px" });
+	const product = c.product
+		? products.find((p) => p.slug === c.product)
+		: undefined;
+	const productName = product?.name;
 
 	return (
 		<motion.div
@@ -45,41 +51,35 @@ function CaseCard({
 						fill
 						className="object-contain p-10"
 					/>
+				) : product ? (
+					/* An illustration standing in for the real map, which belongs
+					   on the case study page itself */
+					<ProductGraphic
+						variant={product.graphic}
+						label={product.graphicAlt}
+					/>
 				) : (
-					<>
-						<svg
-							className="absolute inset-0 w-full h-full opacity-[0.04]"
-							xmlns="http://www.w3.org/2000/svg">
-							<defs>
-								<pattern
-									id={`grid-cs-${c.slug}`}
-									width="32"
-									height="32"
-									patternUnits="userSpaceOnUse">
-									<path
-										d="M 32 0 L 0 0 0 32"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="0.5"
-									/>
-								</pattern>
-							</defs>
-							<rect width="100%" height="100%" fill={`url(#grid-cs-${c.slug})`} />
-						</svg>
-						<div className="absolute inset-0 flex items-center justify-center px-6">
-							<p
-								className="text-xs text-center font-medium"
-								style={{ color: "var(--text-muted)" }}>
-								{c.imagePlaceholders.wide}
-							</p>
-						</div>
-					</>
+					<div className="absolute inset-0 flex items-center justify-center px-6">
+						<p
+							className="text-xs text-center font-medium"
+							style={{ color: "var(--text-muted)" }}>
+							{c.imagePlaceholders.wide}
+						</p>
+					</div>
 				)}
 				<div
 					className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.18em] font-semibold px-2.5 py-1"
 					style={{ background: c.accent + "22", color: c.accent }}>
 					{c.tag}
 				</div>
+				{/* Derived from the product field, never written into the card */}
+				{productName && (
+					<div
+						className="absolute bottom-4 left-4 text-[10px] uppercase tracking-[0.18em] font-semibold px-2.5 py-1"
+						style={{ background: "var(--bg)", color: "var(--text)" }}>
+						{productName}
+					</div>
+				)}
 			</div>
 
 			{/* Body */}
@@ -147,7 +147,7 @@ const CaseStudiesIndex: NextPage = () => {
 	return (
 		<>
 			<SEO
-				title="Case Studies — Kaistrum"
+				title="Case Studies — Kairos"
 				description="Real-world GIS deployments across government, utilities, agriculture, and humanitarian sectors. Full case studies with measurable outcomes."
 				path="/case-studies"
 				jsonLd={breadcrumbSchema([

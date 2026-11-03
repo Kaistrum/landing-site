@@ -68,7 +68,7 @@ const features = [
 		tab: "Support",
 		category: "SUPPORT",
 		headline: "24/7 expert support, whenever you need it.",
-		body: "Every Kaistrum client gets SLA-backed technical support with dedicated account manager, remote diagnostics, and proactive platform monitoring — so your GIS environment stays healthy and your team stays unblocked.",
+		body: "Every Kairos client gets SLA-backed technical support with dedicated account manager, remote diagnostics, and proactive platform monitoring — so your GIS environment stays healthy and your team stays unblocked.",
 		cta: "Explore the service",
 		href: "/services/support",
 		image: "/services/support.webp",
@@ -83,7 +83,7 @@ export default function Features() {
 
 	return (
 		<section
-			id="products"
+			id="services"
 			className="py-20 md:py-32 px-4 md:px-6 relative"
 			style={{ background: "var(--bg)" }}>
 			<div

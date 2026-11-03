@@ -56,8 +56,8 @@ const About: NextPage = () => {
 	return (
 		<>
 			<SEO
-				title="About — Kaistrum"
-				description="Kaistrum is an enterprise GIS company building spatial intelligence software for governments, utilities, and NGOs across Africa and beyond."
+				title="About — Kairos"
+				description="Kairos Spatial Solutions is an enterprise GIS company building spatial intelligence software for governments, utilities, and NGOs across Africa and beyond."
 				path="/about"
 				jsonLd={[
 					orgSchema(),
@@ -115,7 +115,7 @@ const About: NextPage = () => {
 							initial={{ opacity: 0, y: 14 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.7, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}>
-							Kaistrum builds enterprise GIS software for organisations that need
+							Kairos Spatial Solutions builds enterprise GIS software for organisations that need
 							authoritative spatial data — governments, utilities, NGOs, and
 							infrastructure operators working at continental scale.
 						</motion.p>
@@ -154,7 +154,7 @@ const About: NextPage = () => {
 							<p
 								className="text-base leading-[1.85]"
 								style={{ color: "var(--text-dim)" }}>
-								Kaistrum was founded to close that gap. We combine enterprise GIS
+								Kairos was founded to close that gap. We combine enterprise GIS
 								platform expertise with deep experience in the environments where
 								that software actually has to run — unreliable power, low
 								bandwidth, mixed device fleets, and end users who are engineers or
@@ -217,38 +217,6 @@ const About: NextPage = () => {
 						</div>
 					</div>
 				</section>
-
-				{/* ── Image placeholder ── */}
-				<div
-					className="w-full relative overflow-hidden"
-					style={{ aspectRatio: "16/5", background: "var(--bg-surface)" }}>
-					<svg
-						className="absolute inset-0 w-full h-full opacity-[0.04]"
-						xmlns="http://www.w3.org/2000/svg">
-						<defs>
-							<pattern
-								id="grid-about"
-								width="32"
-								height="32"
-								patternUnits="userSpaceOnUse">
-								<path
-									d="M 32 0 L 0 0 0 32"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="0.5"
-								/>
-							</pattern>
-						</defs>
-						<rect width="100%" height="100%" fill="url(#grid-about)" />
-					</svg>
-					<div className="absolute inset-0 flex items-center justify-center">
-						<p
-							className="text-xs font-medium"
-							style={{ color: "var(--text-muted)" }}>
-							Kaistrum team — field deployment
-						</p>
-					</div>
-				</div>
 
 				{/* ── CTA ── */}
 				<section

@@ -6,7 +6,6 @@ import About from "@/components/About";
 import Features from "@/components/Features";
 import Industries from "@/components/Industries";
 import CaseStudies from "@/components/CaseStudies";
-import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -14,8 +13,8 @@ const Home: NextPage = () => {
 	return (
 		<>
 			<SEO
-				title="Kaistrum — Geospatial Solutions and Services"
-				description="Kaistrum delivers enterprise GIS deployments, spatial data migration, custom GIS development, and system integration for governments, utilities, and NGOs across Africa and beyond."
+				title="Kairos Spatial Solutions — Geospatial Solutions and Services"
+				description="Kairos Spatial Solutions delivers enterprise GIS deployments, spatial data migration, custom GIS development, and system integration for governments, utilities, and NGOs across Africa and beyond."
 				path="/"
 				jsonLd={[orgSchema(), websiteSchema()]}
 			/>
@@ -27,7 +26,6 @@ const Home: NextPage = () => {
 				<Features />
 				<Industries />
 				<CaseStudies />
-				<Testimonials />
 				<Contact />
 				<Footer />
 			</main>

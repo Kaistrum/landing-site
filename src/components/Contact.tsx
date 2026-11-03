@@ -98,7 +98,7 @@ export default function Contact() {
 						className="text-sm md:text-base mt-5 max-w-lg mx-auto leading-relaxed"
 						style={{ color: "var(--text-dim)" }}>
 						Tell us about your organisation and GIS needs — we'll show you how
-						Kaistrum fits.
+						Kairos fits.
 					</p>
 				</div>
 
@@ -127,7 +127,7 @@ export default function Contact() {
 							<span
 								className="text-xs font-bold tracking-widest uppercase"
 								style={{ color: "var(--text)" }}>
-								Kaistrum
+								Kairos
 							</span>
 						</div>
 							<p
